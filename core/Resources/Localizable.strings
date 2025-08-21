@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  AnimesEmAltaMac
+  
+  Localização pt-BR
+*/
+
+// MARK: - Títulos
+"Animes em Alta" = "Animes em Alta";
+"Detalhes do Anime" = "Detalhes do Anime";
+"Selecione um anime" = "Selecione um anime";
+"Escolha um anime da lista para ver os detalhes" = "Escolha um anime da lista para ver os detalhes";
+
+// MARK: - Ações
+"Atualizar" = "Atualizar";
+"Atualizar Lista" = "Atualizar Lista";
+"Tentar novamente" = "Tentar novamente";
+"Abrir no AniList" = "Abrir no AniList";
+"Buscar anime..." = "Buscar anime...";
+"Atualizar lista de animes" = "Atualizar lista de animes";
+
+// MARK: - Estados
+"Carregando animes..." = "Carregando animes...";
+"Carregando sinopse..." = "Carregando sinopse...";
+"Nenhum anime encontrado" = "Nenhum anime encontrado";
+"Tente atualizar a lista" = "Tente atualizar a lista";
+"Ops! Algo deu errado" = "Ops! Algo deu errado";
+
+// MARK: - Metadados
+"Avaliação" = "Avaliação";
+"Popularidade" = "Popularidade";
+"Episódios" = "Episódios";
+"Ano" = "Ano";
+"Sinopse" = "Sinopse";
+"Sem título" = "Sem título";
+"N/A" = "N/A";
+
+// MARK: - Acessibilidade
+"Capa de %@" = "Capa de %@";
+"Lista de animes" = "Lista de animes";
+"Erro" = "Erro";
+"Nota: %@" = "Nota: %@";
+"Popularidade: %@" = "Popularidade: %@";
+"%@ episódios" = "%@ episódios";
+"Ano: %@" = "Ano: %@";
+
+// MARK: - Menu
+"Sobre o AniList" = "Sobre o AniList";
+"Documentação da API" = "Documentação da API";
+
+// MARK: - Erros
+"URL inválida" = "URL inválida";
+"Resposta inválida do servidor" = "Resposta inválida do servidor";
+"Nenhum dado recebido" = "Nenhum dado recebido";
+"Erro ao processar dados: %@" = "Erro ao processar dados: %@";
+"Erro de rede: %@" = "Erro de rede: %@";
+"Erro HTTP: %d" = "Erro HTTP: %d";
+"Erro ao carregar descrição: %@" = "Erro ao carregar descrição: %@";
+"Erro ao carregar mais: %@" = "Erro ao carregar mais: %@";
