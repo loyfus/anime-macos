@@ -7,6 +7,12 @@ do [AniList](https://anilist.co).
 ![macOS](https://img.shields.io/badge/macOS-13%2B-000000?style=flat-square&logo=apple&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-F05138?style=flat-square)
 
+## O problema
+
+A API GraphQL do AniList responde bem, mas força qualquer cliente a montar
+query e lidar com um envelope aninhado. Quem só quer olhar os animes em alta
+não deveria precisar saber que existe GraphQL.
+
 ## O que faz
 
 - Lista de animes em tendência, com paginação ao rolar
