@@ -1,29 +1,51 @@
 # AnimesEmAltaMac
 
-App macOS nativo para ver os animes mais populares, usando a API GraphQL publica
+App macOS nativo para ver os animes mais populares, usando a API GraphQL pública
 do [AniList](https://anilist.co).
 
-![Swift](https://img.shields.io/badge/Swift-5.9%2B-orange)
-![macOS](https://img.shields.io/badge/macOS-13%2B-blue)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-native-green)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Swift](https://img.shields.io/badge/Swift-5.9%2B-F05138?style=flat-square&logo=swift&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-13%2B-000000?style=flat-square&logo=apple&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-F05138?style=flat-square)
 
-## Funcionalidades
+## O que faz
 
-- Lista de animes em tendencia, com paginacao ao rolar
-- Busca local por titulo, sem nova requisicao
-- Detalhes: sinopse, nota, popularidade, episodios e ano
+- Lista de animes em tendência, com paginação ao rolar
+- Busca local por título, sem nova requisição
+- Detalhes: sinopse, nota, popularidade, episódios e ano
 - Link direto para o anime no AniList
 - Light e Dark Mode
-- `NavigationSplitView` com toolbar, atalhos de teclado e VoiceOver
 
-## Requisitos
+## Decisões
 
-- macOS 13 (Ventura) ou superior
-- Xcode 15 ou superior
-- Internet para acessar a API do AniList
+**SwiftUI puro, sem dependência externa.** `NavigationSplitView`, `AsyncImage` e
+`URLCache` cobrem o app inteiro. Um gerenciador de pacotes seria custo sem
+contrapartida para algo que faz duas requisições GraphQL.
 
-## Como rodar
+**A busca é local.** Filtrar a lista atual não consome cota da API — o AniList
+limita taxa, e busca por título a cada tecla seria o jeito mais rápido de
+atingir o limite.
+
+**As chamadas de rede ficam num `actor`.** `AnimeService` é um actor justamente
+porque a serialização dá thread-safety de graça, sem travar a main.
+
+## Arquitetura
+
+```
+core/
+├── Features/Trending/
+│   ├── Models/         Anime, Codable
+│   ├── Networking/     AnimeService (GraphQL, actor)
+│   ├── ViewModels/     paginação e busca local
+│   └── Views/          lista, detalhe e linha
+├── Shared/
+│   ├── Components/     tela de erro
+│   ├── DesignSystem/   Theme
+│   └── Utils/          erro de rede, HTML, GraphQL
+├── Resources/          Assets e localização pt-BR
+└── Tests/              testes unitários
+```
+
+## Rodar
 
 ```bash
 git clone https://github.com/loyfus/animeSwift.git
@@ -31,59 +53,43 @@ cd animeSwift
 open anime-swift.xcodeproj
 ```
 
-Aperte Cmd-R para rodar.
-
-## Estrutura
-
-```
-core/
-- Features/Trending/
-|   |- Models/Anime.swift            # Codable
-|   |- Networking/AnimeService.swift # GraphQL do AniList
-|   |- ViewModels/                   # paginacao e busca local
-|   |- Views/                        # lista, detalhe e linha
-- Shared/
-|   |- Components/ErrorStateView.swift
-|   |- DesignSystem/Theme.swift
-|   |- Utils/                        # erro de rede, HTML, GraphQL
-- Resources/Assets.xcassets
-- Tests/                             # testes unitarios
-```
-
-## Arquitetura
-
-MVVM leve: `Models` sao structs `Codable`, `AnimeListViewModel` e um
-`@MainActor ObservableObject`, e as `Views` sao SwiftUI puro. As chamadas de
-rede ficam num `actor`, o que da thread-safety sem travar a main. Sem dependencia
-externa - so frameworks nativos.
-
-## API AniList
-
-Endpoint `https://graphql.anilist.co`. Duas queries: uma pagina de `Media`
-ordenada por `TRENDING_DESC`, e uma `Media(id:)` para a sinopse.
-
-A API e publica e nao exige autenticacao, mas tem limite de taxa. O app faz
-cache com `URLCache` e carrega imagens com `AsyncImage` justamente para nao
-repetir requisicao. Respeite os [Termos de Uso](https://anilist.co/terms).
-
-## Testes
-
-`core/Tests/` cobre a decodificacao dos modelos e a montagem das requisicoes
-GraphQL.
-
-> O `.xcodeproj` versionado tem apenas o target de aplicacao. Para rodar os
-> testes, crie um target unit-test que inclua `core/Tests` no Xcode.
+Depois Cmd-R. Requer macOS 13 ou superior e Xcode 15 ou superior.
 
 ## Atalhos
 
-| Atalho | Acao |
+| Atalho | Ação |
 | --- | --- |
 | Cmd-R | Atualizar a lista |
 | Cmd-F | Focar a busca |
 | Cmd-O | Abrir o anime no AniList |
 
-## Licenca
+## API AniList
 
-MIT - veja [LICENSE](LICENSE).
+Endpoint `https://graphql.anilist.co`, sem autenticação. Duas queries: uma
+página de `Media` ordenada por `TRENDING_DESC`, e uma `Media(id:)` para a
+sinopse.
 
-Agradecimentos ao [AniList](https://anilist.co) pela API publica.
+A API tem limite de taxa. O app faz cache com `URLCache` e carrega imagens com
+`AsyncImage` justamente para não repetir requisição. Respeite os
+[Termos de Uso](https://anilist.co/terms).
+
+## Testes
+
+`core/Tests/` cobre a decodificação dos modelos e a montagem das requisições
+GraphQL.
+
+> O `.xcodeproj` versionado tem apenas o target de aplicação. Para rodar os
+> testes, crie no Xcode um target unit-test que inclua `core/Tests`.
+
+## Stack
+
+| | |
+| --- | --- |
+| Linguagem | Swift 5.9+ |
+| UI | SwiftUI · macOS 13+ |
+| Concorrência | async/await · actor |
+| Dependências | nenhuma |
+
+## Licença
+
+MIT — [LICENSE](LICENSE).
