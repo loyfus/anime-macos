@@ -7,6 +7,9 @@ do [AniList](https://anilist.co).
 ![macOS](https://img.shields.io/badge/macOS-13%2B-000000?style=flat-square&logo=apple&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-F05138?style=flat-square)
 
+> **Contexto.** Projeto de estudo — não está em produção. App macOS em SwiftUI puro sobre a
+> GraphQL do AniList, sem dependência externa.
+
 ## O problema
 
 A API GraphQL do AniList responde bem, mas força qualquer cliente a montar
@@ -54,8 +57,8 @@ core/
 ## Rodar
 
 ```bash
-git clone https://github.com/loyfus/animeSwift.git
-cd animeSwift
+git clone https://github.com/loyfus/anime-macos.git
+cd anime-macos
 open anime-swift.xcodeproj
 ```
 
