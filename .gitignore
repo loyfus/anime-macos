@@ -1,0 +1,23 @@
+# Xcode personal state — never shared, regenerates on open
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Build output
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds / SPM
+timeline.xctimeline
+playground.xcworkspace
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
